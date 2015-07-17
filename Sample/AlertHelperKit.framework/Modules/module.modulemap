@@ -1,0 +1,10 @@
+framework module AlertHelperKit {
+  umbrella header "AlertHelperKit.h"
+
+  export *
+  module * { export * }
+}
+
+module AlertHelperKit.Swift {
+    header "AlertHelperKit-Swift.h"
+}
