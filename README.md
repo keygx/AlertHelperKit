@@ -132,15 +132,18 @@ sheet.showActionSheet(self) { buttonIndex in
 ```ViewController.swift
 var sheet = AlertHelperKit()
 sheet.cancelButton = "Cancel"
-sheet.otherButtons = ["Action1", "Action2", "Action3", "Action4", "Action5"]
-sheet.disabledButtons = ["Action1", "Action4"]
+sheet.otherButtons = ["Menu1", "Menu2", "Menu3", "Menu4", "Menu5"]
+sheet.disabledButtons = ["Menu1", "Menu4"]
 sheet.sender = sender
 sheet.arrowDirection = .Down
 sheet.popoverStyle = .BarButton
-
+    
 sheet.showActionSheet(self) { buttonIndex in
     switch buttonIndex {
-    	//
+    case 0:
+        println("Cancel: \(buttonIndex)")
+    default:
+        println("Menu: \(buttonIndex)")
     }
 }
 ```
