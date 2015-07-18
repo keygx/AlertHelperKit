@@ -57,6 +57,7 @@ AlertHelperKit().showAlert(self, title: "Alert", message: "Message", button: "OK
 ### Alert with callback handler
 
 ```ViewController.swift
+var alert = AlertHelperKit()
 alert.title = "Alert"
 alert.message = "Message"
 alert.cancelButton = "Cancel"
