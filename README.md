@@ -62,7 +62,7 @@ alert.message = "Message"
 alert.cancelButton = "Cancel"
 alert.otherButtons = ["OK"]
 
-alert.showAlertWithHandler(self, style: .Alert) { buttonIndex in
+alert.showAlertWithHandler(self) { buttonIndex in
     switch buttonIndex {
     	//
     }
@@ -81,7 +81,7 @@ alert.cancelButton = "Cancel"
 alert.otherButtons = ["OK"]
 alert.inputFields = [InputField(placeholder: "username", secure: false), InputField(placeholder: "password", secure: true)]
 
-alert.showAlertWithHandler(self, style: .Alert) { buttonIndex in
+alert.showAlertWithHandler(self) { buttonIndex in
     switch buttonIndex {
     case 0:
         println("Cancel: \(buttonIndex)")
@@ -116,7 +116,7 @@ sheet.otherButtons = ["Action2", "Action3", "Action4"]
 sheet.sender = sender
 sheet.arrowDirection = .Up
 
-sheet.showActionSheet(self, style: .ActionSheet) { buttonIndex in
+sheet.showActionSheet(self) { buttonIndex in
     switch buttonIndex {
     	//
     }
@@ -137,7 +137,7 @@ sheet.sender = sender
 sheet.arrowDirection = .Down
 sheet.popoverStyle = .BarButton
 
-sheet.showActionSheet(self, style: .ActionSheet) { buttonIndex in
+sheet.showActionSheet(self) { buttonIndex in
     switch buttonIndex {
     	//
     }

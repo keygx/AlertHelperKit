@@ -1,7 +1,7 @@
 //
 //  AlertHelperKit.swift
 //
-//  Created by keygx on 2015/07/17.
+//  Created by keygx on 2015/07/18.
 //  Copyright (c) 2015年 keygx. All rights reserved.
 //
 
@@ -72,9 +72,9 @@ public class AlertHelperKit {
     }
     
     // Alert with Callback Handler
-    public func showAlertWithHandler(parent: UIViewController, style: UIAlertControllerStyle, handler: (Int) -> ()) {
+    public func showAlertWithHandler(parent: UIViewController, handler: (Int) -> ()) {
         
-        let alertController: UIAlertController = buildAlertController(style) { buttonIndex in
+        let alertController: UIAlertController = buildAlertController(.Alert) { buttonIndex in
             handler(buttonIndex)
         }
         
@@ -84,9 +84,9 @@ public class AlertHelperKit {
     }
     
     // ActionSheet
-    public func showActionSheet(parent: UIViewController, style: UIAlertControllerStyle, handler: (Int) -> ()) {
+    public func showActionSheet(parent: UIViewController, handler: (Int) -> ()) {
         
-        let alertController: UIAlertController = buildAlertController(style) { buttonIndex in
+        let alertController: UIAlertController = buildAlertController(.ActionSheet) { buttonIndex in
             handler(buttonIndex)
         }
         

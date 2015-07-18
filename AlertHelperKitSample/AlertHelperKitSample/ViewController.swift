@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  AlertHelperKitSample
 //
-//  Created by keygx on 2015/07/17.
+//  Created by keygx on 2015/07/18.
 //  Copyright (c) 2015年 keygx. All rights reserved.
 //
 
@@ -35,7 +35,7 @@ class ViewController: UIViewController {
         println("View Alert")
         }*/
         
-        alert.showAlertWithHandler(self, style: .Alert) { buttonIndex in
+        alert.showAlertWithHandler(self) { buttonIndex in
             switch buttonIndex {
             case 0:
                 println("Cancel: \(buttonIndex)")
@@ -54,7 +54,7 @@ class ViewController: UIViewController {
         alert.otherButtons = ["OK"]
         alert.inputFields = [InputField(placeholder: "username", secure: false), InputField(placeholder: "password", secure: true)]
         
-        alert.showAlertWithHandler(self, style: .Alert) { buttonIndex in
+        alert.showAlertWithHandler(self) { buttonIndex in
             switch buttonIndex {
             case 0:
                 println("Cancel: \(buttonIndex)")
@@ -86,7 +86,7 @@ class ViewController: UIViewController {
         sheet.sender = sender
         sheet.arrowDirection = .Up
         
-        sheet.showActionSheet(self, style: .ActionSheet) { buttonIndex in
+        sheet.showActionSheet(self) { buttonIndex in
             switch buttonIndex {
             case 0:
                 println("Cancel: \(buttonIndex)")
@@ -106,7 +106,7 @@ class ViewController: UIViewController {
         sheet.arrowDirection = .Down
         sheet.popoverStyle = .BarButton
         
-        sheet.showActionSheet(self, style: .ActionSheet) { buttonIndex in
+        sheet.showActionSheet(self) { buttonIndex in
             switch buttonIndex {
             case 0:
                 println("Cancel: \(buttonIndex)")
