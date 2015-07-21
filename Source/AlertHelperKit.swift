@@ -1,7 +1,7 @@
 //
 //  AlertHelperKit.swift
 //
-//  Created by keygx on 2015/07/18.
+//  Created by keygx on 2015/07/21.
 //  Copyright (c) 2015年 keygx. All rights reserved.
 //
 
@@ -10,6 +10,43 @@ import UIKit
 public enum ActionSheetPopoverStyle: Int {
     case Normal = 0
     case BarButton
+}
+
+public struct Parameters {
+    var title: String?
+    var message: String?
+    var cancelButton: String?
+    var otherButtons: [String]?
+    var destructiveButtons: [String]?
+    var disabledButtons: [String]?
+    var inputFields: [InputField]?
+    var sender: AnyObject?
+    var arrowDirection: UIPopoverArrowDirection?
+    var popoverStyle: ActionSheetPopoverStyle = .Normal
+    
+    public init(
+        title: String? = nil,
+        message: String? = nil,
+        cancelButton: String? = nil,
+        otherButtons: [String]? = nil,
+        destructiveButtons: [String]? = nil,
+        disabledButtons: [String]? = nil,
+        inputFields: [InputField]? = nil,
+        sender: AnyObject? = nil,
+        arrowDirection: UIPopoverArrowDirection? = nil,
+        popoverStyle: ActionSheetPopoverStyle = .Normal
+    ) {
+        self.title = title
+        self.message = message
+        self.cancelButton = cancelButton
+        self.otherButtons = otherButtons
+        self.destructiveButtons = destructiveButtons
+        self.disabledButtons = disabledButtons
+        self.inputFields = inputFields
+        self.sender = sender
+        self.arrowDirection = arrowDirection
+        self.popoverStyle = popoverStyle
+    }
 }
 
 public struct InputField {
@@ -24,20 +61,8 @@ public struct InputField {
 
 public class AlertHelperKit {
     
-    public var title: String?
-    public var message: String?
-    public var cancelButton: String?
-    public var destructiveButtons: [String]?
-    public var otherButtons: [String]?
-    public var disabledButtons: [String]?
-    public var sender: AnyObject?
-    public var arrowDirection: UIPopoverArrowDirection?
-    
     public var animated: Bool = true
     public var completionHandler: (() -> Void)?
-    public var popoverStyle: ActionSheetPopoverStyle = .Normal
-    
-    public var inputFields: [InputField]?
     public var textFields: [AnyObject]?
     
     public init() {
@@ -45,57 +70,48 @@ public class AlertHelperKit {
     }
     
     private func initialize() {
-        title = nil
-        message = nil
-        cancelButton = nil
-        destructiveButtons = nil
-        otherButtons = nil
-        sender = nil
-        arrowDirection = nil
         animated = true
         completionHandler = nil
-        popoverStyle = .Normal
-        inputFields = nil
         textFields = nil
     }
     
     // Alert
     public func showAlert(parent: UIViewController, title: String?, message: String?, button: String) {
             
-            let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-            
-            // cancel
-            let cancelAction = UIAlertAction(title: button, style: .Cancel, handler: nil)
-            alertController.addAction(cancelAction)
-            
-            show(parent, ac: alertController)
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        
+        // cancel
+        let cancelAction = UIAlertAction(title: button, style: .Cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        show(parent, ac: alertController)
     }
     
     // Alert with Callback Handler
-    public func showAlertWithHandler(parent: UIViewController, handler: (Int) -> ()) {
+    public func showAlertWithHandler(parent: UIViewController, parameters: Parameters, handler: (Int) -> ()) {
         
-        let alertController: UIAlertController = buildAlertController(.Alert) { buttonIndex in
+        let alertController: UIAlertController = buildAlertController(.Alert, params: parameters) { buttonIndex in
             handler(buttonIndex)
         }
         
-        buttonDisabled(alertController)
+        buttonDisabled(alertController, params: parameters)
         
         show(parent, ac: alertController)
     }
     
     // ActionSheet
-    public func showActionSheet(parent: UIViewController, handler: (Int) -> ()) {
+    public func showActionSheet(parent: UIViewController, parameters: Parameters, handler: (Int) -> ()) {
         
-        let alertController: UIAlertController = buildAlertController(.ActionSheet) { buttonIndex in
+        let alertController: UIAlertController = buildAlertController(.ActionSheet, params: parameters) { buttonIndex in
             handler(buttonIndex)
         }
         
-        buttonDisabled(alertController)
+        buttonDisabled(alertController, params: parameters)
         
-        if let popover = alertController.popoverPresentationController, let sender: AnyObject = sender, let arrowDirection = arrowDirection {
+        if let popover = alertController.popoverPresentationController, let sender: AnyObject = parameters.sender, let arrowDirection = parameters.arrowDirection {
             popover.sourceView = parent.view
             
-            switch popoverStyle {
+            switch parameters.popoverStyle {
             case .BarButton:
                 popover.barButtonItem = sender as! UIBarButtonItem
             default:
@@ -109,18 +125,14 @@ public class AlertHelperKit {
     }
     
     // Build AlertController
-    private func buildAlertController(style: UIAlertControllerStyle, handler: (Int) -> ()) -> UIAlertController {
+    private func buildAlertController(style: UIAlertControllerStyle, params: Parameters, handler: (Int) -> ()) -> UIAlertController {
         
-        if style == .ActionSheet {
-            inputFields = nil
-        }
-        
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: style)
+        let alertController = UIAlertController(title: params.title, message: params.message, preferredStyle: style)
         let destructivOffset = 1
         var othersOffset = destructivOffset
         
         // cancel
-        if let cancel = cancelButton {
+        if let cancel = params.cancelButton {
             let cancelAction = UIAlertAction(title: cancel, style: .Cancel) {
                 action in handler(0)
             }
@@ -128,7 +140,7 @@ public class AlertHelperKit {
         }
         
         // destructive
-        if let destructive = destructiveButtons {
+        if let destructive = params.destructiveButtons {
             for i in 0..<destructive.count {
                 let destructiveAction = UIAlertAction(title: destructive[i], style: .Destructive) {
                     action in handler(i + destructivOffset)
@@ -140,7 +152,7 @@ public class AlertHelperKit {
         }
         
         // others
-        if let others = otherButtons {
+        if let others = params.otherButtons {
             for i in 0..<others.count {
                 let otherAction = UIAlertAction(title: others[i], style: .Default) {
                     action in handler(i + othersOffset)
@@ -150,16 +162,18 @@ public class AlertHelperKit {
         }
         
         // textFields
-        if let inputFields = inputFields {
-            for i in 0..<inputFields.count {
-                alertController.addTextFieldWithConfigurationHandler({ textField in
-                    // placeholder
-                    textField.placeholder = inputFields[i].placeholder
-                    // secure
-                    if let secure = inputFields[i].secure {
-                        textField.secureTextEntry = secure
-                    }
-                })
+        if style != .ActionSheet {
+            if let inputFields = params.inputFields {
+                for i in 0..<inputFields.count {
+                    alertController.addTextFieldWithConfigurationHandler({ textField in
+                        // placeholder
+                        textField.placeholder = inputFields[i].placeholder
+                        // secure
+                        if let secure = inputFields[i].secure {
+                            textField.secureTextEntry = secure
+                        }
+                    })
+                }
             }
         }
         
@@ -167,8 +181,8 @@ public class AlertHelperKit {
     }
     
     // Button Disabled
-    private func buttonDisabled(alertController: UIAlertController) {
-        if let buttons = disabledButtons {
+    private func buttonDisabled(alertController: UIAlertController, params: Parameters) {
+        if let buttons = params.disabledButtons {
             for alertAction in alertController.actions {
                 let action: UIAlertAction = alertAction as! UIAlertAction
                 for title in buttons {

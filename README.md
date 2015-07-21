@@ -3,7 +3,7 @@
 UIAlertController helper library in Swift
 
 ## Requirements
-- Swift 1.2 (Xcode 6.3 or later)
+- Swift 1.2
 - iOS 8.0 or later
 
 ## Installation
@@ -57,15 +57,19 @@ AlertHelperKit().showAlert(self, title: "Alert", message: "Message", button: "OK
 ### Alert with callback handler
 
 ```ViewController.swift
-var alert = AlertHelperKit()
-alert.title = "Alert"
-alert.message = "Message"
-alert.cancelButton = "Cancel"
-alert.otherButtons = ["OK"]
-
-alert.showAlertWithHandler(self) { buttonIndex in
+let params = Parameters(
+    title: "Alert",
+    message: "Message",
+    cancelButton: "Cancel",
+    otherButtons: ["OK"]
+)
+    
+AlertHelperKit().showAlertWithHandler(self, parameters: params) { buttonIndex in
     switch buttonIndex {
-    	//
+    case 0:
+        println("Cancel: \(buttonIndex)")
+    default:
+        println("OK: \(buttonIndex)")
     }
 }
 ```
@@ -75,20 +79,23 @@ alert.showAlertWithHandler(self) { buttonIndex in
 ### Alert with TextFields
 
 ```ViewController.swift
+let params = Parameters(
+    title: "Alert",
+    message: "Message",
+    cancelButton: "Cancel",
+    otherButtons: ["OK"],
+    inputFields: [InputField(placeholder: "username", secure: false),
+                  InputField(placeholder: "password", secure: true)]
+)
+    
 var alert = AlertHelperKit()
-alert.title = "Alert"
-alert.message = "Message"
-alert.cancelButton = "Cancel"
-alert.otherButtons = ["OK"]
-alert.inputFields = [InputField(placeholder: "username", secure: false), InputField(placeholder: "password", secure: true)]
-
-alert.showAlertWithHandler(self) { buttonIndex in
+alert.showAlertWithHandler(self, parameters: params) { buttonIndex in
     switch buttonIndex {
     case 0:
         println("Cancel: \(buttonIndex)")
     default:
         println("OK: \(buttonIndex)")
-        
+
         if let textFields = alert.textFields {
             // username
             let name: UITextField = textFields[0] as! UITextField
@@ -110,16 +117,20 @@ alert.showAlertWithHandler(self) { buttonIndex in
 ### ActionSheet
 
 ```ViewController.swift
-var sheet = AlertHelperKit()
-sheet.cancelButton = "Cancel"
-sheet.destructiveButtons = ["Action1"]
-sheet.otherButtons = ["Action2", "Action3", "Action4"]
-sheet.sender = sender
-sheet.arrowDirection = .Up
-
-sheet.showActionSheet(self) { buttonIndex in
+let params = Parameters(
+    cancelButton: "Cancel",
+    destructiveButtons: ["Action1"],
+    otherButtons: ["Action2", "Action3", "Action4"],
+    sender: sender,
+    arrowDirection: .Up
+)
+    
+AlertHelperKit().showActionSheet(self, parameters: params) { buttonIndex in
     switch buttonIndex {
-    	//
+    case 0:
+        println("Cancel: \(buttonIndex)")
+    default:
+        println("Action: \(buttonIndex)")
     }
 }
 ```
@@ -130,15 +141,16 @@ sheet.showActionSheet(self) { buttonIndex in
 ### ActionSheet
 
 ```ViewController.swift
-var sheet = AlertHelperKit()
-sheet.cancelButton = "Cancel"
-sheet.otherButtons = ["Menu1", "Menu2", "Menu3", "Menu4", "Menu5"]
-sheet.disabledButtons = ["Menu1", "Menu4"]
-sheet.sender = sender
-sheet.arrowDirection = .Down
-sheet.popoverStyle = .BarButton
+let params = Parameters(
+    cancelButton: "Cancel",
+    otherButtons: ["Menu1", "Menu2", "Menu3", "Menu4", "Menu5"],
+    disabledButtons: ["Menu1", "Menu4"],
+    sender: sender,
+    arrowDirection: .Down,
+    popoverStyle: .BarButton
+)
     
-sheet.showActionSheet(self) { buttonIndex in
+AlertHelperKit().showActionSheet(self, parameters: params) { buttonIndex in
     switch buttonIndex {
     case 0:
         println("Cancel: \(buttonIndex)")
