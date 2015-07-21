@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  AlertHelperKitSample
 //
-//  Created by keygx on 2015/07/18.
+//  Created by keygx on 2015/07/21.
 //  Copyright (c) 2015年 keygx. All rights reserved.
 //
 
@@ -26,16 +26,14 @@ class ViewController: UIViewController {
     
     @IBAction func btnAlertWithHandlerAction(sender: AnyObject) {
         
-        var alert = AlertHelperKit()
-        alert.title = "Alert"
-        alert.message = "Message"
-        alert.cancelButton = "Cancel"
-        alert.otherButtons = ["OK"]
-        /*alert.completionHandler = {
-        println("View Alert")
-        }*/
+        let params = Parameters(
+            title: "Alert",
+            message: "Message",
+            cancelButton: "Cancel",
+            otherButtons: ["OK"]
+        )
         
-        alert.showAlertWithHandler(self) { buttonIndex in
+        AlertHelperKit().showAlertWithHandler(self, parameters: params) { buttonIndex in
             switch buttonIndex {
             case 0:
                 println("Cancel: \(buttonIndex)")
@@ -47,20 +45,23 @@ class ViewController: UIViewController {
     
     @IBAction func btnAlertWithTextFieldsAction(sender: AnyObject) {
         
-        var alert = AlertHelperKit()
-        alert.title = "Alert"
-        alert.message = "Message"
-        alert.cancelButton = "Cancel"
-        alert.otherButtons = ["OK"]
-        alert.inputFields = [InputField(placeholder: "username", secure: false), InputField(placeholder: "password", secure: true)]
+        let params = Parameters(
+            title: "Alert",
+            message: "Message",
+            cancelButton: "Cancel",
+            otherButtons: ["OK"],
+            inputFields: [InputField(placeholder: "username", secure: false),
+                          InputField(placeholder: "password", secure: true)]
+        )
         
-        alert.showAlertWithHandler(self) { buttonIndex in
+        var alert = AlertHelperKit()
+        alert.showAlertWithHandler(self, parameters: params) { buttonIndex in
             switch buttonIndex {
             case 0:
                 println("Cancel: \(buttonIndex)")
             default:
                 println("OK: \(buttonIndex)")
-                
+
                 if let textFields = alert.textFields {
                     // username
                     let name: UITextField = textFields[0] as! UITextField
@@ -79,14 +80,15 @@ class ViewController: UIViewController {
     
     @IBAction func btnActionSheetAction(sender: AnyObject) {
         
-        var sheet = AlertHelperKit()
-        sheet.cancelButton = "Cancel"
-        sheet.destructiveButtons = ["Action1"]
-        sheet.otherButtons = ["Action2", "Action3", "Action4"]
-        sheet.sender = sender
-        sheet.arrowDirection = .Up
+        let params = Parameters(
+            cancelButton: "Cancel",
+            destructiveButtons: ["Action1"],
+            otherButtons: ["Action2", "Action3", "Action4"],
+            sender: sender,
+            arrowDirection: .Up
+        )
         
-        sheet.showActionSheet(self) { buttonIndex in
+        AlertHelperKit().showActionSheet(self, parameters: params) { buttonIndex in
             switch buttonIndex {
             case 0:
                 println("Cancel: \(buttonIndex)")
@@ -98,15 +100,16 @@ class ViewController: UIViewController {
     
     @IBAction func btnBarMenuAction(sender: AnyObject) {
         
-        var sheet = AlertHelperKit()
-        sheet.cancelButton = "Cancel"
-        sheet.otherButtons = ["Menu1", "Menu2", "Menu3", "Menu4", "Menu5"]
-        sheet.disabledButtons = ["Menu1", "Menu4"]
-        sheet.sender = sender
-        sheet.arrowDirection = .Down
-        sheet.popoverStyle = .BarButton
+        let params = Parameters(
+            cancelButton: "Cancel",
+            otherButtons: ["Menu1", "Menu2", "Menu3", "Menu4", "Menu5"],
+            disabledButtons: ["Menu1", "Menu4"],
+            sender: sender,
+            arrowDirection: .Down,
+            popoverStyle: .BarButton
+        )
         
-        sheet.showActionSheet(self) { buttonIndex in
+        AlertHelperKit().showActionSheet(self, parameters: params) { buttonIndex in
             switch buttonIndex {
             case 0:
                 println("Cancel: \(buttonIndex)")
