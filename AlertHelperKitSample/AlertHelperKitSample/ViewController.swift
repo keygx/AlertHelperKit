@@ -36,9 +36,9 @@ class ViewController: UIViewController {
         AlertHelperKit().showAlertWithHandler(self, parameters: params) { buttonIndex in
             switch buttonIndex {
             case 0:
-                println("Cancel: \(buttonIndex)")
+                print("Cancel: \(buttonIndex)")
             default:
-                println("OK: \(buttonIndex)")
+                print("OK: \(buttonIndex)")
             }
         }
     }
@@ -54,25 +54,27 @@ class ViewController: UIViewController {
                           InputField(placeholder: "password", secure: true)]
         )
         
-        var alert = AlertHelperKit()
+        let alert = AlertHelperKit()
         alert.showAlertWithHandler(self, parameters: params) { buttonIndex in
             switch buttonIndex {
             case 0:
-                println("Cancel: \(buttonIndex)")
+                print("Cancel: \(buttonIndex)")
             default:
-                println("OK: \(buttonIndex)")
+                print("OK: \(buttonIndex)")
 
-                if let textFields = alert.textFields {
-                    // username
-                    let name: UITextField = textFields[0] as! UITextField
-                    if count(name.text) > 0 {
-                        println(name.text)
-                    }
-                    // password
-                    let pass: UITextField = textFields[1] as! UITextField
-                    if count(pass.text) > 0 {
-                        println(pass.text)
-                    }
+                guard let textFields = alert.textFields else {
+                    return
+                }
+                
+                // username
+                let name: UITextField = textFields[0] as! UITextField
+                if name.text!.characters.count > 0 {
+                    print(name.text)
+                }
+                // password
+                let pass: UITextField = textFields[1] as! UITextField
+                if pass.text!.characters.count > 0 {
+                    print(pass.text)
                 }
             }
         }
@@ -91,9 +93,9 @@ class ViewController: UIViewController {
         AlertHelperKit().showActionSheet(self, parameters: params) { buttonIndex in
             switch buttonIndex {
             case 0:
-                println("Cancel: \(buttonIndex)")
+                print("Cancel: \(buttonIndex)")
             default:
-                println("Action: \(buttonIndex)")
+                print("Action: \(buttonIndex)")
             }
         }
     }
@@ -112,9 +114,9 @@ class ViewController: UIViewController {
         AlertHelperKit().showActionSheet(self, parameters: params) { buttonIndex in
             switch buttonIndex {
             case 0:
-                println("Cancel: \(buttonIndex)")
+                print("Cancel: \(buttonIndex)")
             default:
-                println("Menu: \(buttonIndex)")
+                print("Menu: \(buttonIndex)")
             }
         }
     }

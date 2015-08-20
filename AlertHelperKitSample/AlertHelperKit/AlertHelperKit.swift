@@ -113,7 +113,7 @@ public class AlertHelperKit {
             
             switch parameters.popoverStyle {
             case .BarButton:
-                popover.barButtonItem = sender as! UIBarButtonItem
+                popover.barButtonItem = sender as? UIBarButtonItem
             default:
                 popover.sourceRect = sender.frame
             }
@@ -182,13 +182,15 @@ public class AlertHelperKit {
     
     // Button Disabled
     private func buttonDisabled(alertController: UIAlertController, params: Parameters) {
-        if let buttons = params.disabledButtons {
-            for alertAction in alertController.actions {
-                let action: UIAlertAction = alertAction as! UIAlertAction
-                for title in buttons {
-                    if action.title == title {
-                        action.enabled = false
-                    }
+        guard let buttons = params.disabledButtons else {
+            return
+        }
+        
+        for alertAction in alertController.actions {
+            let action: UIAlertAction = alertAction
+            for title in buttons {
+                if action.title == title {
+                    action.enabled = false
                 }
             }
         }
