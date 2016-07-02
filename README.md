@@ -3,7 +3,7 @@
 UIAlertController helper library in Swift
 
 ## Requirements
-- Swift 2.2
+- Swift 3.0
 - iOS 8.0 or later
 
 ## Installation
@@ -14,6 +14,11 @@ UIAlertController helper library in Swift
 
 ```Cartfile
 github "keygx/AlertHelperKit"
+```
+or
+
+```Cartfile
+github "keygx/AlertHelperKit" "branch-name"
 ```
 
 * install
@@ -32,8 +37,22 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.0'
 use_frameworks!
 
-pod 'AlertHelperKit', :git => 'https://github.com/keygx/AlertHelperKit'
+target '<Your Target Name>' do
+    pod 'AlertHelperKit', :git => 'https://github.com/keygx/AlertHelperKit'
+end
 ```
+or
+
+```PodFile
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0'
+use_frameworks!
+
+target '<Your Target Name>' do
+    pod 'AlertHelperKit', :git => 'https://github.com/keygx/AlertHelperKit', :branch => 'branch-name'
+end
+```
+
 * install
 
 ```
@@ -122,7 +141,7 @@ let params = Parameters(
     destructiveButtons: ["Action1"],
     otherButtons: ["Action2", "Action3", "Action4"],
     sender: sender,
-    arrowDirection: .Up
+    arrowDirection: .up
 )
     
 AlertHelperKit().showActionSheet(self, parameters: params) { buttonIndex in
@@ -146,8 +165,8 @@ let params = Parameters(
     otherButtons: ["Menu1", "Menu2", "Menu3", "Menu4", "Menu5"],
     disabledButtons: ["Menu1", "Menu4"],
     sender: sender,
-    arrowDirection: .Down,
-    popoverStyle: .BarButton
+    arrowDirection: .down,
+    popoverStyle: .barButton
 )
     
 AlertHelperKit().showActionSheet(self, parameters: params) { buttonIndex in
