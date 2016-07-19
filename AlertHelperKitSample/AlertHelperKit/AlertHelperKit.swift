@@ -16,8 +16,8 @@ public struct Parameters {
     var title: String?
     var message: String?
     var cancelButton: String?
-    var otherButtons: [String]?
     var destructiveButtons: [String]?
+    var otherButtons: [String]?
     var disabledButtons: [String]?
     var inputFields: [InputField]?
     var sender: AnyObject?
@@ -28,8 +28,8 @@ public struct Parameters {
         title: String? = nil,
         message: String? = nil,
         cancelButton: String? = nil,
-        otherButtons: [String]? = nil,
         destructiveButtons: [String]? = nil,
+        otherButtons: [String]? = nil,
         disabledButtons: [String]? = nil,
         inputFields: [InputField]? = nil,
         sender: AnyObject? = nil,
@@ -39,8 +39,8 @@ public struct Parameters {
         self.title = title
         self.message = message
         self.cancelButton = cancelButton
-        self.otherButtons = otherButtons
         self.destructiveButtons = destructiveButtons
+        self.otherButtons = otherButtons
         self.disabledButtons = disabledButtons
         self.inputFields = inputFields
         self.sender = sender
