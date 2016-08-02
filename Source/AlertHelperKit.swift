@@ -77,7 +77,6 @@ public class AlertHelperKit {
     
     // Alert
     public func showAlert(_ parent: UIViewController, title: String?, message: String?, button: String) {
-            
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
         // cancel
@@ -89,7 +88,6 @@ public class AlertHelperKit {
     
     // Alert with Callback Handler
     public func showAlertWithHandler(_ parent: UIViewController, parameters: Parameters, handler: (Int) -> ()) {
-        
         let alertController: UIAlertController = buildAlertController(.alert, params: parameters) { buttonIndex in
             handler(buttonIndex)
         }
@@ -101,7 +99,6 @@ public class AlertHelperKit {
     
     // ActionSheet
     public func showActionSheet(_ parent: UIViewController, parameters: Parameters, handler: (Int) -> ()) {
-        
         let alertController: UIAlertController = buildAlertController(.actionSheet, params: parameters) { buttonIndex in
             handler(buttonIndex)
         }
