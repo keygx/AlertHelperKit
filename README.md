@@ -20,6 +20,11 @@ or
 ```Cartfile
 github "keygx/AlertHelperKit" "branch-name"
 ```
+or
+
+```Cartfile
+github "keygx/AlertHelperKit" "tag"
+```
 
 * install
 
@@ -50,6 +55,17 @@ use_frameworks!
 
 target '<Your Target Name>' do
     pod 'AlertHelperKit', :git => 'https://github.com/keygx/AlertHelperKit', :branch => 'branch-name'
+end
+```
+or
+
+```PodFile
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0'
+use_frameworks!
+
+target '<Your Target Name>' do
+    pod 'AlertHelperKit', :git => 'https://github.com/keygx/AlertHelperKit', :tag => 'tag'
 end
 ```
 
