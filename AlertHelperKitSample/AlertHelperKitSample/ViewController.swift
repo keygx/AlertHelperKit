@@ -19,12 +19,12 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    @IBAction func btnAlertAction(sender: AnyObject) {
+    @IBAction func btnAlertAction(_ sender: AnyObject) {
         
         AlertHelperKit().showAlert(self, title: "Alert", message: "Message", button: "OK")
     }
     
-    @IBAction func btnAlertWithHandlerAction(sender: AnyObject) {
+    @IBAction func btnAlertWithHandlerAction(_ sender: AnyObject) {
         
         let params = Parameters(
             title: "Alert",
@@ -43,7 +43,7 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func btnAlertWithTextFieldsAction(sender: AnyObject) {
+    @IBAction func btnAlertWithTextFieldsAction(_ sender: AnyObject) {
         
         let params = Parameters(
             title: "Alert",
@@ -80,14 +80,14 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func btnActionSheetAction(sender: AnyObject) {
+    @IBAction func btnActionSheetAction(_ sender: AnyObject) {
         
         let params = Parameters(
             cancelButton: "Cancel",
             destructiveButtons: ["Action1"],
             otherButtons: ["Action2", "Action3", "Action4"],
             sender: sender,
-            arrowDirection: .Up
+            arrowDirection: .up
         )
         
         AlertHelperKit().showActionSheet(self, parameters: params) { buttonIndex in
@@ -100,15 +100,15 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func btnBarMenuAction(sender: AnyObject) {
+    @IBAction func btnBarMenuAction(_ sender: AnyObject) {
         
         let params = Parameters(
             cancelButton: "Cancel",
             otherButtons: ["Menu1", "Menu2", "Menu3", "Menu4", "Menu5"],
             disabledButtons: ["Menu1", "Menu4"],
             sender: sender,
-            arrowDirection: .Down,
-            popoverStyle: .BarButton
+            arrowDirection: .down,
+            popoverStyle: .barButton
         )
         
         AlertHelperKit().showActionSheet(self, parameters: params) { buttonIndex in
