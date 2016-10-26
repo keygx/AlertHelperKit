@@ -184,7 +184,7 @@ public class AlertHelperKit {
         }
         
         for alertAction in alertController.actions {
-            let action: UIAlertAction = alertAction
+            let action = alertAction as UIAlertAction
             for title in buttons {
                 if action.title == title {
                     action.isEnabled = false
@@ -195,7 +195,7 @@ public class AlertHelperKit {
     
     // Appear Alert
     private func show(_ vc: UIViewController, ac: UIAlertController) {
-        self.textFields = ac.textFields
+        textFields = ac.textFields
         vc.present(ac, animated: animated, completion: completionHandler)
     }
     
