@@ -3,7 +3,7 @@
 UIAlertController helper library in Swift
 
 ## Requirements
-- Swift 3.0
+- Swift 3.0.1
 - iOS 8.0 or later
 
 ## Installation
