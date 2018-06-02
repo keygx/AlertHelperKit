@@ -68,12 +68,12 @@ class ViewController: UIViewController {
                 
                 // username
                 let name: UITextField = textFields[0] as! UITextField
-                if name.text!.characters.count > 0 {
+                if name.text!.count > 0 {
                     print(name.text!)
                 }
                 // password
                 let pass: UITextField = textFields[1] as! UITextField
-                if pass.text!.characters.count > 0 {
+                if pass.text!.count > 0 {
                     print(pass.text!)
                 }
             }
