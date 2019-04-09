@@ -3,104 +3,30 @@
 UIAlertController helper library in Swift
 
 ## Requirements
-- Swift 4.2
+- Swift 5
 - iOS 8.0 or later
 
 ## Installation
 
 ### Carthage
 
-* Cartfile
-
 ```Cartfile
 github "keygx/AlertHelperKit"
 ```
-or
-
-```Cartfile
-github "keygx/AlertHelperKit" "branch-name"
-```
-or
-
-```Cartfile
-github "keygx/AlertHelperKit" "tag"
-```
-
-* install
-
-```
-$ carthage update
-```
-To integrate "AlertHelperKit.framework" into your Xcode project
 
 ### CocoaPods
 
-* PodFile
-
 ```PodFile
-platform :ios, '8.0'
-
-target '<Your Target Name>' do
-    use_frameworks!
-    
-    pod 'AlertHelperKit', :git => 'https://github.com/keygx/AlertHelperKit'
-    
-    post_install do |installer|
-        installer.pods_project.targets.each do |target|
-            target.build_configurations.each do |config|
-                config.build_settings['SWIFT_VERSION'] = '4.1'
-            end
-        end
-    end
-    
-end
-```
-or
-
-```PodFile
-platform :ios, '8.0'
-
-target '<Your Target Name>' do
-    use_frameworks!
-    
-    pod 'AlertHelperKit', :git => 'https://github.com/keygx/AlertHelperKit', :branch => 'branch-name'
-    
-    post_install do |installer|
-        installer.pods_project.targets.each do |target|
-            target.build_configurations.each do |config|
-                config.build_settings['SWIFT_VERSION'] = '4.1'
-            end
-        end
-    end
-    
-end
-```
-or
-
-```PodFile
-platform :ios, '8.0'
-
-target '<Your Target Name>' do
-    use_frameworks!
-    
-    pod 'AlertHelperKit', :git => 'https://github.com/keygx/AlertHelperKit', :tag => 'tag'
-    
-    post_install do |installer|
-        installer.pods_project.targets.each do |target|
-            target.build_configurations.each do |config|
-                config.build_settings['SWIFT_VERSION'] = '4.1'
-            end
-        end
-    end
-    
-end
+pod 'AlertHelperKit', :git => 'https://github.com/keygx/AlertHelperKit'  
 ```
 
-* install
+### Swift versions support
 
-```
-$ pod install
-```
+- Swift 5, tag "swift5"
+- Swift 4.2, tag "swift4.2"
+- Swift 4.1, tag "swift4.1"
+- Swift 4.0, tag "swift4.0"
+
 
 ## Usage
 
